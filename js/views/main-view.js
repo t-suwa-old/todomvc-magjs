@@ -79,7 +79,7 @@
 	  },
 
 	  _onblur: function () {
-	    props.txn.rollback();
+	    props.txn.commit();
 	  }
 	},
 
