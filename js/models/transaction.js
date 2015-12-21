@@ -13,6 +13,7 @@
     this.input = null;
     this.item = null;
     this.backup = null;
+    this.updated = null;
   };
 
   app.Transaction.prototype.begin = function (node, input, item) {
@@ -36,6 +37,8 @@
     props.todos.update(this.item);
 
     this.editing.off();
+
+    this.updated = Date.now();
   };
 
   app.Transaction.prototype.rollback = function () {
@@ -47,6 +50,8 @@
     this.input.value = this.backup;
 
     this.editing.off();
+
+    this.updated = Date.now();
   };
 
   app.Transaction.prototype.isEditing = function (item) {
