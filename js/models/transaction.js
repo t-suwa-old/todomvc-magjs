@@ -21,13 +21,16 @@
     this.item = item;
     this.backup = item.title();
 
+    this.input.value = item.title();
+
     this.editing.on();
 
-    this.input.value = item.title();
     this.input.focus();
   };
 
   app.Transaction.prototype.commit = function () {
+    if (!this.editing.isActive()) return;
+
     console.log('commit');
 
     props.todos.update(this.item);
@@ -36,9 +39,12 @@
   };
 
   app.Transaction.prototype.rollback = function () {
+    if (!this.editing.isActive()) return;
+
     console.log('rollback');
 
     this.item.title(this.backup);
+    this.input.value = this.backup;
 
     this.editing.off();
   };
