@@ -9,10 +9,8 @@
 	if (isNew) {
 	  node.focus();
 	}
-      },
 
-      _onfocus: function () {
-	this.value = '';
+	node.value = '';
       },
 
       _value: todo.title(),
@@ -24,7 +22,6 @@
 
 	if (todo.validate()) {
           props.todos.add(todo);
-          this.value = '';
 	}
       }
     };
