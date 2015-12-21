@@ -6,11 +6,11 @@
 
     state.input = {
       _config: function(node, isNew) {
-	if (isNew) {
-	  node.focus();
-	}
+        if (isNew) {
+          node.focus();
+        }
 
-	node.value = '';
+        node.value = '';
       },
 
       _value: todo.title(),
@@ -18,11 +18,11 @@
       _onchange: mag.withProp('value', todo.title),
 
       _onkeyup: function (e) {
-	if (e.which != props.key.ENTER) return;
+        if (e.which != props.key.ENTER) return;
 
-	if (todo.validate()) {
+        if (todo.validate()) {
           props.todos.add(todo);
-	}
+        }
       }
     };
   };
