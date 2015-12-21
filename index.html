@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" data-framework="magjs">
+  <head>
+    <meta charset="utf-8">
+    <title>MagJS • TodoMVC</title>
+    <link rel="stylesheet" href="node_modules/todomvc-common/base.css">
+    <link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
+  </head>
+  <body>
+    <section id="todoapp" class="todoapp">
+      <header id="header" class="header">
+        <h1>todos</h1>
+        <input class="new-todo" placeholder="What needs to be done?" autofocus>
+      </header>
+
+      <section id="main" class="main" style="display: none">
+        <input class="toggle-all" type="checkbox">
+        <label for="toggle-all">Mark all as complete</label>
+        <ul class="todo-list">
+          <li>
+            <div class="view">
+              <input class="toggle" type="checkbox">
+              <label></label>
+              <button class="destroy"></button>
+            </div>
+            <input class="edit">
+          </li>
+        </ul>
+      </section>
+
+      <footer id="footer" class="footer" style="display: none">
+        <span class="todo-count">
+          <strong></strong>
+        </span>
+        <ul class="filters">
+          <li>
+            <a class="selected" href="#/">All</a>
+          </li>
+          <li>
+            <a href="#/active">Active</a>
+          </li>
+          <li>
+            <a href="#/completed">Completed</a>
+          </li>
+        </ul>
+        <button class="clear-completed">Clear completed</button>
+      </footer>
+    </section>
+
+    <footer class="info">
+      <p>Double-click to edit a todo</p>
+      <p>Created by <a href="https://github.com/t-suwa">Tomotaka SUWA</a>
+        <br>(Special thanks to
+        <a href="https://github.com/magnumjs/magjs">MagJS</a>)
+      </p>
+      <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+    </footer>
+    <script src="node_modules/todomvc-common/base.js"></script>
+
+    <script src="lib/route.js"></script>
+    <script src="lib/mag.min.js"></script>
+    <script src="lib/mag.namespace.js"></script>
+
+    <script src="js/controllers/todo-controller.js"></script>
+    <script src="js/views/todo-view.js"></script>
+    <script src="js/views/header-view.js"></script>
+    <script src="js/views/main-view.js"></script>
+    <script src="js/views/footer-view.js"></script>
+    <script src="js/models/todo-model.js"></script>
+    <script src="js/models/todo-list.js"></script>
+    <script src="js/models/transaction.js"></script>
+    <script src="js/models/storage.js"></script>
+
+    <script src="js/boot.js"></script>
+  </body>
+</html>
