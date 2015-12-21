@@ -70,7 +70,7 @@
   app.TodoList.prototype.update = function (item) {
     item.title(item.title().trim());
 
-    if (!item.title()) {
+    if (item.title() == '') {
       this.remove(item);
     } else {
       this.sync();
