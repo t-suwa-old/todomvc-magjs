@@ -17,7 +17,7 @@
 
       _oninput: mag.withProp('value', todo.title),
 
-      _onkeyup: function (e) {
+      _onkeypress: function (e) {
         if (e.which != props.app.ENTER_KEY) return;
 
         if (todo.validate()) {

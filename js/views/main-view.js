@@ -69,14 +69,14 @@
           _oninput: mag.withProp('value', item.title),
 
           _onkeyup: function (e) {
-            switch (e.which) {
-            case props.app.ESC_KEY:
+            if (e.which == props.app.ESC_KEY) {
               props.transaction.rollback();
-              break;
+            }
+          },
 
-            case props.app.ENTER_KEY:
+          _onkeypress: function (e) {
+            if (e.which == props.app.ENTER_KEY) {
               props.transaction.commit();
-              break;
             }
           },
 
