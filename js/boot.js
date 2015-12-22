@@ -1,7 +1,7 @@
 (function (app) {
   'use strict';
 
-  // constans, utils
+  // constants, utils
   var utils = app.Utility;
 
   // data store

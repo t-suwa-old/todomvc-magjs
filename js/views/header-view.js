@@ -5,7 +5,7 @@
     var todo = props.todos.create();
 
     state.input = {
-      _config: function(node, isNew) {
+      _config: function (node, isNew) {
         if (isNew) {
           node.focus();
         }
