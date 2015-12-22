@@ -4,20 +4,17 @@
   // private properties
   var props = {};
 
-  app.Transaction = function (todos, css, util) {
-    props.todos = todos;
-    props.css = css;
-    props.util = util;
+  app.Transaction = function (args) {
+    props = args;
 
     this.editing = null;
     this.input = null;
     this.item = null;
     this.backup = null;
-    this.updated = null;
   };
 
   app.Transaction.prototype.begin = function (node, input, item) {
-    this.editing = props.util.nodeCss(node, props.css.ITEM_EDITING);
+    this.editing = props.app.cssEditing(node);
     this.input = input;
     this.item = item;
     this.backup = item.title();
@@ -32,33 +29,21 @@
   app.Transaction.prototype.commit = function () {
     if (!this.editing.isActive()) return;
 
-    console.log('commit');
+    // update the item title in case IME session is active
+    this.item.title(this.input.value);
 
     props.todos.update(this.item);
 
     this.editing.off();
-
-    this.updated = Date.now();
   };
 
   app.Transaction.prototype.rollback = function () {
     if (!this.editing.isActive()) return;
 
-    console.log('rollback');
-
+    // restore original title
     this.item.title(this.backup);
     this.input.value = this.backup;
 
     this.editing.off();
-
-    this.updated = Date.now();
-  };
-
-  app.Transaction.prototype.isEditing = function (item) {
-    if (this.item === item) {
-      return this.editing.isActive();
-    }
-
-    return false;
   };
 })(mag.namespace('app'));

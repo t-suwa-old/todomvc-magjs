@@ -4,6 +4,8 @@
   Main.view = function (state, props) {
     var summary = props.todos.summary();
 
+    console.log('main-view');
+    
     state._config = function (node) {
       if (summary.current == 0) {
         node.style.display = 'none';
@@ -28,7 +30,7 @@
 
       return {
         _config: function (node) {
-	  var hidden = props.util.nodeCss(node, props.css.ITEM_HIDDEN);
+	  var hidden = props.app.cssHidden(node);
 
 	  li = node;
 
@@ -39,13 +41,13 @@
           _text: item.title(),
 
           _ondblclick: function (e) {
-            props.txn.begin(li, input, item);
+            props.transaction.begin(li, input, item);
           }
         },
 
         'toggle': {
           _config: function (node) {
-	    var completed = props.util.nodeCss(li, props.css.ITEM_COMPLETED);
+	    var completed = props.app.cssCompleted(li);
 
             node.checked = item.completed();
 
@@ -68,18 +70,18 @@
 
 	  _onkeyup: function (e) {
 	    switch (e.which) {
-	    case props.key.ESC:
-	      props.txn.rollback();
+	    case props.app.ESC_KEY:
+	      props.transaction.rollback();
 	      break;
 
-	    case props.key.ENTER:
-	      props.txn.commit();
+	    case props.app.ENTER_KEY:
+	      props.transaction.commit();
 	      break;
 	    }
 	  },
 
 	  _onblur: function () {
-	    props.txn.commit();
+	    props.transaction.commit();
 	  }
 	},
 

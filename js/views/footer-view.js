@@ -26,7 +26,7 @@
       _config: function (node) {
 	var filter = props.todos.currentFilter();
 	var pos = node.href.lastIndexOf(filter);
-	var selected = props.util.nodeCss(node, props.css.ITEM_SELECTED);
+	var selected = props.app.cssSelected(node);
 
 	if (node.href.length - pos == filter.length) {
           selected.on();
