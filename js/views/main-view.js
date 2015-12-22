@@ -7,7 +7,7 @@
     console.log('main-view');
     
     state._config = function (node) {
-      if (summary.current === 0) {
+      if (summary.filtered === 0) {
         node.style.display = 'none';
       } else {
         node.style.display = 'block';

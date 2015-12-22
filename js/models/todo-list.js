@@ -34,7 +34,7 @@
   app.TodoList.prototype.summary = function () {
     var length = props.list.length;
     var completed = 0;
-    var current = 0;
+    var filtered = 0;
     var self = this;
 
     props.list.forEach(function (item) {
@@ -43,7 +43,7 @@
       }
 
       if (self.predicate(item)) {
-        current ++;
+        filtered ++;
       }
     });
 
@@ -51,7 +51,7 @@
       total: length,
       completed: completed,
       active: length - completed,
-      current: current
+      filtered: filtered
     };
   };
 
