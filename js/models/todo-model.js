@@ -17,6 +17,6 @@
   };
 
   app.TodoModel.prototype.validate = function () {
-    return this.title().trim() != '';
+    return this.title().trim() !== '';
   };
 })(mag.namespace('app'));

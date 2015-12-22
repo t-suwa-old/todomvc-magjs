@@ -7,7 +7,7 @@
     console.log('main-view');
     
     state._config = function (node) {
-      if (summary.current == 0) {
+      if (summary.current === 0) {
         node.style.display = 'none';
       } else {
         node.style.display = 'block';
@@ -16,7 +16,7 @@
 
     state['toggle-all'] = {
       _config: function (node) {
-        node.checked = (summary.active == 0);
+        node.checked = (summary.active === 0);
       },
 
       _onclick: function () {
@@ -30,11 +30,11 @@
 
       return {
         _config: function (node) {
-	  var hidden = props.app.cssHidden(node);
+          var hidden = props.app.cssHidden(node);
 
-	  li = node;
+          li = node;
 
-	  hidden.set(!props.todos.predicate(item));
+          hidden.set(!props.todos.predicate(item));
         },
 
         label: {
@@ -47,11 +47,11 @@
 
         'toggle': {
           _config: function (node) {
-	    var completed = props.app.cssCompleted(li);
+            var completed = props.app.cssCompleted(li);
 
             node.checked = item.completed();
 
-	    completed.set(node.checked);
+            completed.set(node.checked);
           },
 
           _onclick: function () {
@@ -60,30 +60,30 @@
         },
 
         'edit': {
-	  _config: function (node) {
-	    input = node;
-	  },
+          _config: function (node) {
+            input = node;
+          },
 
-	  _value: item.title(),
+          _value: item.title(),
 
-	  _onchange: mag.withProp('value', item.title),
+          _oninput: mag.withProp('value', item.title),
 
-	  _onkeyup: function (e) {
-	    switch (e.which) {
-	    case props.app.ESC_KEY:
-	      props.transaction.rollback();
-	      break;
+          _onkeyup: function (e) {
+            switch (e.which) {
+            case props.app.ESC_KEY:
+              props.transaction.rollback();
+              break;
 
-	    case props.app.ENTER_KEY:
-	      props.transaction.commit();
-	      break;
-	    }
-	  },
+            case props.app.ENTER_KEY:
+              props.transaction.commit();
+              break;
+            }
+          },
 
-	  _onblur: function () {
-	    props.transaction.commit();
-	  }
-	},
+          _onblur: function () {
+            props.transaction.commit();
+          }
+        },
 
         'destroy': {
           _onclick: function () {

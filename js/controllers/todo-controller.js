@@ -16,7 +16,7 @@
 
     lifeCycleEvents.forEach(function (e) {
       self[e] = function () {
-	console.log(this.id + ': ' + e);
+        console.log(this.id + ': ' + e);
       }.bind(self);
     });
   };

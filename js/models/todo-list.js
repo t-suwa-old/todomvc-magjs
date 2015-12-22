@@ -39,11 +39,11 @@
 
     props.list.forEach(function (item) {
       if (item.completed()) {
-	completed ++;
+        completed ++;
       }
 
       if (self.predicate(item)) {
-	current ++;
+        current ++;
       }
     });
 
@@ -70,7 +70,7 @@
   app.TodoList.prototype.update = function (item) {
     item.title(item.title().trim());
 
-    if (item.title() == '') {
+    if (item.title() === '') {
       this.remove(item);
     } else {
       this.sync();

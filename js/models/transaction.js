@@ -14,6 +14,8 @@
   };
 
   app.Transaction.prototype.begin = function (node, input, item) {
+    console.log('begin');
+
     this.editing = props.app.cssEditing(node);
     this.input = input;
     this.item = item;
@@ -29,21 +31,22 @@
   app.Transaction.prototype.commit = function () {
     if (!this.editing.isActive()) return;
 
-    // update the item title in case IME session is active
-    this.item.title(this.input.value);
-
-    props.todos.update(this.item);
+    console.log('commit');
 
     this.editing.off();
+
+    props.todos.update(this.item);
   };
 
   app.Transaction.prototype.rollback = function () {
     if (!this.editing.isActive()) return;
 
+    console.log('rollback');
+
+    this.editing.off();
+
     // restore original title
     this.item.title(this.backup);
     this.input.value = this.backup;
-
-    this.editing.off();
   };
 })(mag.namespace('app'));
