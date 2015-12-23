@@ -4,6 +4,7 @@
   app.TodoModel = function (obj) {
     var props = obj || {};
 
+    this.id = '' + Math.floor(Math.random() * 1000) + Date.now();
     this.title = mag.prop(props.title || '');
     this.completed = mag.prop(props.completed || false);
   };
