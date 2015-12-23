@@ -6,11 +6,11 @@
 
     state.input = {
       _config: function (node, isNew) {
+        node.value = '';
+
         if (isNew) {
           node.focus();
         }
-
-        node.value = '';
       },
 
       _value: todo.title(),
