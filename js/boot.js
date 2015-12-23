@@ -7,17 +7,10 @@
   // data store
   var todos = new app.TodoList(app.TodoModel, app.Storage);
 
-  // editing helper
-  var transaction = new app.Transaction({
-    app: utils,
-    todos: todos
-  });
-
   // initialize component
   mag.module('todoapp', app.Todo, {
     app: utils,
-    todos: todos,
-    transaction: transaction
+    todos: todos
   });
 
   // routing handler

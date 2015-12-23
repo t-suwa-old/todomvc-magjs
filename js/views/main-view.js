@@ -3,8 +3,6 @@
 
   Main.view = function (state, props) {
     var summary = props.todos.summary();
-
-    console.log('main-view');
     
     state._config = function (node) {
       if (summary.filtered === 0) {
@@ -25,33 +23,28 @@
     };
 
     state.li = props.todos.list().map(function (item) {
-      var li = null;
-      var input = null;
-
       return {
         _config: function (node) {
           var hidden = props.app.cssHidden(node);
-
-          li = node;
+          var completed = props.app.cssCompleted(node);
+          var editing = props.app.cssEditing(node);
 
           hidden.set(!props.todos.predicate(item));
+          completed.set(item.completed());
+          editing.set(state.isEditing(item));
         },
 
         label: {
           _text: item.title(),
 
           _ondblclick: function (e) {
-            props.transaction.begin(li, input, item);
+            state.beginEditing(item);
           }
         },
 
         'toggle': {
           _config: function (node) {
-            var completed = props.app.cssCompleted(li);
-
             node.checked = item.completed();
-
-            completed.set(node.checked);
           },
 
           _onclick: function () {
@@ -61,27 +54,34 @@
 
         'edit': {
           _config: function (node) {
-            input = node;
+            node.value = item.title();
+
+            if (state.isEditing(item)) {
+              node.focus();
+            }
           },
 
           _value: item.title(),
 
-          _oninput: mag.withProp('value', item.title),
+          _onchange: mag.withProp('value', item.title),
 
           _onkeyup: function (e) {
             if (e.which == props.app.ESC_KEY) {
-              props.transaction.rollback();
+              state.cancelEditing();
             }
           },
 
           _onkeypress: function (e) {
             if (e.which == props.app.ENTER_KEY) {
-              props.transaction.commit();
+              // force update the title in case IME is active
+              item.title(this.value);
+
+              state.finishEditing(props);
             }
           },
 
           _onblur: function () {
-            props.transaction.commit();
+            state.finishEditing(props);
           }
         },
 
