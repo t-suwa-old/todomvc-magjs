@@ -54,27 +54,25 @@
 
         'edit': {
           _config: function (node) {
-            node.value = item.title();
-
             if (state.isEditing(item)) {
               node.focus();
+            } else {
+              node.blur();
             }
           },
 
           _value: item.title(),
 
-          _onchange: mag.withProp('value', item.title),
+          _oninput: mag.withProp('value', item.title),
 
           _onkeyup: function (e) {
             if (e.which == props.app.ESC_KEY) {
-              state.cancelEditing();
+              state.cancelEditing(this);
             }
           },
 
           _onkeypress: function (e) {
             if (e.which == props.app.ENTER_KEY) {
-              // force update the title in case IME is active
-              item.title(this.value);
               state.finishEditing();
             }
           },

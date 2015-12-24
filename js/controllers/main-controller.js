@@ -13,10 +13,12 @@
       return this._item == item;
     };
 
-    this.cancelEditing = function () {
+    this.cancelEditing = function (input) {
       if (!this._item) return;
 
+      // restore original value
       this._item.title(this._backup);
+      input.value = this._backup;
 
       this._item = null;
     };
