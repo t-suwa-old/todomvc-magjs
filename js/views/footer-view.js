@@ -14,10 +14,10 @@
 
     state['todo-count'] = {
       _config: function (node) {
-        var prural = summary.active == 1 ? '' : 's';
+        var plural = summary.active == 1 ? '' : 's';
         
         node.innerHTML = '<strong>' +
-          summary.active + '</strong> item' + prural + ' left';
+          summary.active + '</strong> item' + plural + ' left';
       }
     };
 
