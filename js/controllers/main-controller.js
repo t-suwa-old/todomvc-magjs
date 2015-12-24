@@ -21,7 +21,7 @@
       this._item = null;
     };
 
-    this.finishEditing = function (props) {
+    this.finishEditing = function () {
       if (!this._item) return;
 
       props.todos.update(this._item);

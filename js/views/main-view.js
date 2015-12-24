@@ -75,13 +75,12 @@
             if (e.which == props.app.ENTER_KEY) {
               // force update the title in case IME is active
               item.title(this.value);
-
-              state.finishEditing(props);
+              state.finishEditing();
             }
           },
 
           _onblur: function () {
-            state.finishEditing(props);
+            state.finishEditing();
           }
         },
 
