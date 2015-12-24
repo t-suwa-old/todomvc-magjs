@@ -13,8 +13,6 @@
         }
       },
 
-      _value: todo.title(),
-
       _oninput: mag.withProp('value', todo.title),
 
       _onkeypress: function (e) {
