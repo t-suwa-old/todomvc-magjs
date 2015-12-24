@@ -57,6 +57,10 @@
             if (state.isEditing(item)) {
               node.focus();
             } else {
+              // refresh value in case item was removed 
+              node.value = item.title();
+
+              // a necessary workaround for phantom cursor(IE)
               node.blur();
             }
           },
@@ -67,7 +71,7 @@
 
           _onkeyup: function (e) {
             if (e.which == props.app.ESC_KEY) {
-              state.cancelEditing(this);
+              state.cancelEditing();
             }
           },
 
