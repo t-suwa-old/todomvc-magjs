@@ -4,5 +4,10 @@
     "es6-promise": "^3.0.2",
     "todomvc-app-css": "^2.0.0",
     "todomvc-common": "^1.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "sinon": "^1.17.2",
+    "sinon-chai": "^2.8.0"
   }
 }
