@@ -4,7 +4,9 @@
   Header.view = function (state, props) {
     state.input = {
       _config: function (node, isNew) {
-        node.focus();
+        if (isNew) {
+          node.focus();
+        }
       },
 
       _onkeypress: function (e) {

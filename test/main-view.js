@@ -27,16 +27,12 @@ describe('main-view', function () {
   it('should provide view', function () {
     app.Todo.Main.view(state, props);
 
-    state.should.respondTo('_config');
-
     state.should.have.property('toggle-all');
     state['toggle-all'].should.respondTo('_config');
     state['toggle-all'].should.respondTo('_onclick');
 
     state.should.have.property('li');
     state.li.forEach(function (li) {
-      li.should.have.property('_config');
-
       li.should.have.property('label');
       li.label.should.have.property('_text');
       li.label.should.respondTo('_ondblclick');
@@ -47,7 +43,6 @@ describe('main-view', function () {
 
       li.should.have.property('edit');
       li.edit.should.have.property('_config');
-      li.edit.should.have.property('_value');
       li.edit.should.respondTo('_oninput');
       li.edit.should.respondTo('_onkeyup');
       li.edit.should.respondTo('_onkeypress');
@@ -55,30 +50,6 @@ describe('main-view', function () {
 
       li.should.have.property('destroy');
       li.destroy.should.respondTo('_onclick');
-    });
-  });
-
-  describe('visiblity', function () {
-    it('should not display when summary.active === 0', function () {
-      var node = { style: {} };
-      
-      app.Todo.Main.view(state, props);
-
-      state._config(node);
-
-      node.style.display.should.equal('none');
-    });
-
-    it('should display when summary.active !== 0', function () {
-      var node = { style: {} };
-
-      todos.add(todos.create());
-      
-      app.Todo.Main.view(state, props);
-
-      state._config(node);
-
-      node.style.display.should.equal('block');
     });
   });
 
@@ -119,6 +90,16 @@ describe('main-view', function () {
       state['toggle-all']._onclick();
 
       toggleAll.should.be.calledWith(false);
+    });
+  });
+
+  describe('list', function () {
+    it('should build a list', function () {
+      props.todos.add(props.todos.create({ title: 'abc' }));
+
+      app.Todo.Main.view(state, props);
+
+      state.li.length.should.equal(1);
     });
   });
 });

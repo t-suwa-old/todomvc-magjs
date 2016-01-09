@@ -27,8 +27,6 @@ describe('footer-view', function () {
   it('should provide view', function () {
     app.Todo.Footer.view(state, props);
 
-    state.should.respondTo('_config');
-
     state.should.have.property('todo-count');
     state['todo-count'].should.respondTo('_config');
 
@@ -38,38 +36,6 @@ describe('footer-view', function () {
     state.should.have.property('clear-completed');
     state['clear-completed'].should.respondTo('_config');
     state['clear-completed'].should.respondTo('_onclick');
-  });
-
-  describe('visiblity', function () {
-    it('should not display if summay.total === 0', function () {
-      app.Todo.Footer.view(state, props);
-
-      var node = {
-        style: {}
-      };
-
-      state._config(node);
-
-      node.style.display.should.equal('none');
-    });
-
-    it('should display if summary.total !== 0', function () {
-      var node = {
-        style: {}
-      };
-
-      // At first, add an item
-      var item = todos.create();
-      todos.add(item);
-
-      // Then call view
-      app.Todo.Footer.view(state, props);
-
-      state._config(node);
-
-      node.style.display.should.equal('block');
-    });
-
   });
 
   describe('plural control', function () {

@@ -8,10 +8,58 @@ describe('main-controller', function () {
   it('should provide methods', function () {
     var controller = new app.Todo.Main.controller();
     
+    controller.should.respondTo('willupdate');
     controller.should.respondTo('beginEditing');
     controller.should.respondTo('isEditing');
+    controller.should.respondTo('updateItem');
     controller.should.respondTo('cancelEditing');
     controller.should.respondTo('finishEditing');
+  });
+
+  describe('visibility', function () {
+    it('should hidden when filtered item == 0', function () {
+      var node = {
+        style: {
+          display: 'abc'
+        }
+      };
+      var props = {
+        todos: {
+          summary: function () {
+            return {
+              filtered: 0
+            };
+          }
+        }
+      };
+      var controller = new app.Todo.Main.controller(props);
+
+      controller.willupdate({}, node, props);
+
+      node.style.display.should.equal('none');
+    });
+
+    it('should show when filtered item != 0', function () {
+      var node = {
+        style: {
+          display: 'abc'
+        }
+      };
+      var props = {
+        todos: {
+          summary: function () {
+            return {
+              filtered: 1
+            };
+          }
+        }
+      };
+      var controller = new app.Todo.Main.controller(props);
+
+      controller.willupdate({}, node, props);
+
+      node.style.display.should.equal('block');
+    });
   });
 
   describe('view state management', function () {
@@ -50,6 +98,18 @@ describe('main-controller', function () {
 
       // here we expect that editing is active
       controller.isEditing(item).should.be.true;
+    });
+
+    it('should update item', function () {
+      var item = {
+        title: mag.prop('123')
+      };
+
+      controller.beginEditing(item);
+
+      controller.updateItem('abc');
+
+      item.title().should.equal('abc');
     });
 
     it('should cancel editing even if editing is not active', function () {
