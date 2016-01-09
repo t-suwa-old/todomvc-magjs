@@ -4,14 +4,6 @@
   Main.view = function (state, props) {
     var summary = props.todos.summary();
     
-    state._config = function (node) {
-      if (summary.filtered === 0) {
-        node.style.display = 'none';
-      } else {
-        node.style.display = 'block';
-      }
-    };
-
     state['toggle-all'] = {
       _config: function (node) {
         node.checked = (summary.active === 0);
@@ -65,9 +57,9 @@
             }
           },
 
-          _value: item.title(),
-
-          _oninput: mag.withProp('value', item.title),
+          _oninput: function () {
+            state.updateItem(this.value);
+          },
 
           _onkeyup: function (e) {
             if (e.which == props.app.ESC_KEY) {

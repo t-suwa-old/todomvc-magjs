@@ -4,14 +4,6 @@
   Footer.view = function (state, props) {
     var summary = props.todos.summary();
 
-    state._config = function (node) {
-      if (summary.total === 0) {
-        node.style.display = 'none';
-      } else {
-        node.style.display = 'block';
-      }
-    };
-
     state['todo-count'] = {
       _config: function (node) {
         var plural = summary.active == 1 ? '' : 's';

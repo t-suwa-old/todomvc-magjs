@@ -2,6 +2,16 @@
   'use strict';
   
   Main.controller = function (props) {
+    this.willupdate = function (event, node, newProps) {
+      var summary = newProps.todos.summary();
+
+      if (summary.filtered === 0) {
+        node.style.display = 'none';
+      } else {
+        node.style.display = 'block';
+      }
+    };
+    
     this._item = null;
 
     this.beginEditing = function (item) {
@@ -11,6 +21,12 @@
 
     this.isEditing = function (item) {
       return this._item == item;
+    };
+
+    this.updateItem = function (title) {
+      if (!this._item) return;
+
+      this._item.title(title);
     };
 
     this.cancelEditing = function () {
@@ -24,7 +40,7 @@
 
     this.finishEditing = function () {
       if (!this._item) return;
-
+      
       props.todos.update(this._item);
 
       this._item = null;

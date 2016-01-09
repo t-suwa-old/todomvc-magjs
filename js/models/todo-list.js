@@ -58,8 +58,8 @@
   //////////////////////////////////////////////////////////////////////
   // Item
 
-  app.TodoList.prototype.create = function () {
-    return new props.model();
+  app.TodoList.prototype.create = function (obj) {
+    return new props.model(obj);
   };
 
   app.TodoList.prototype.add = function (item) {

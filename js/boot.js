@@ -8,23 +8,20 @@
   var todos = new app.TodoList(app.TodoModel, app.Storage);
 
   // initialize component
-  mag.module('todoapp', app.Todo, {
+  var instance = mag.module('todoapp', app.Todo, {
     app: utils,
     todos: todos
   });
 
   // routing handler
-  var handler = function () {
-    var filter = mag.route.param('filter') || '#/';
+  var handler = function (filter) {
+    todos.setFilter(filter || '#/');
 
-    todos.setFilter(filter);
-
-    mag.redraw();
+    instance.draw();
   };
 
-  mag.route.mode = 'hash';
-  mag.route(document.body, '/', {
-    '/': handler,
-    '/:filter': handler
-  });
+  mag.route.addRoute('/', handler);
+  mag.route.addRoute('/:filter', handler);
+  mag.route.load('/');
+  mag.route.start();
 })(mag.namespace('app'));
